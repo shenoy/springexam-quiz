@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Exam - Home</title>
+    <!-- Latest compiled and minified CSS -->
+    <div th:insert="fragments/fragments :: jquery"></div>
+    <div th:insert="fragments/fragments :: bootstrap"></div>
+    <div th:insert="fragments/fragments :: bootstrap-theme"></div>
+    <div th:insert="fragments/fragments :: sidenavcss"></div>
+    <div th:insert="fragments/fragments :: topnavcss"></div>
+    <div th:insert="fragments/fragments :: fontawesome"></div>
+
+</head>
+<body>
+
+<div th:insert="fragments/fragments :: topnav"></div>
+
+<span style="font-size:30px;cursor:pointer" id="menu-button" onclick="openNav()">☰</span>
+
+<div th:insert="fragments/fragments :: sidenav"></div>
+
+<h2 class="text-center">Spring Exam Questions</h2>
+<h3 class="text-center">Chapters</h3>
+
+<div class="container-fluid mt-3">
+
+    <div class="col-6 mx-auto">
+        <div class="card text-center">
+            <ul class="list-group list-group-flush">
+                <li th:each="ch:${chapters}" class="list-group-item" th:inline="text"><a th:href="@{|/question/chapter/${ch.id}|}">
+
+                    <h2>[[${ch.chapterName}]]</h2>
+
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/fragments :: sidenavscript"></div>
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main">
+
+</div>
+
+</body>
+</html>

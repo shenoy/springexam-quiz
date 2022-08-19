@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Exam - Create Question</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <div th:insert="fragments/fragments :: sidenavcss"></div>
+    <div th:insert="fragments/fragments :: topnavcss"></div>
+</head>
+<body>
+
+<div th:insert="fragments/fragments :: topnav"></div>
+
+<span style="font-size:30px;cursor:pointer" id="menu-button" onclick="openNav()">☰</span>
+
+<div th:insert="fragments/fragments :: sidenav"></div>
+
+<h2 class="text-center">Spring Exam Questions</h2>
+
+
+<div class="container-fluid">
+    <h5 class="text-center">Create Question</h5>
+
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <form th:action="@{|/quiz-question/edit/${question.id}|}" th:object="${form}" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label >Chapter:</label><br>
+                        <select class="form-control"  th:field="*{chapterName}">
+                            <option th:each="ch:${chapters}"  th:value="${ch.chapterName}" th:text="${ch.chapterName}"></option>
+                        </select>
+                    </div>
+                    <label for="qn">Question:</label><br>
+                    <input type="text" class = "form-control" id="qn" name="qn" th:field="*{question}"><br>
+                </div>
+                <div class="form-group">
+                    <label >ChoiceA:</label><br>
+                    <input type="text" class = "form-control"   th:field="*{choiceA}"><br>
+                </div>
+                <div class="form-group">
+                    <label >ChoiceB:</label><br>
+                    <input type="text" class = "form-control"  th:field="*{choiceB}"><br>
+                </div>
+                <div class="form-group">
+                    <label >ChoiceC:</label><br>
+                    <input type="text" class = "form-control"  th:field="*{choiceC}"><br>
+                </div>
+                <div class="form-group">
+                    <label >ChoiceD:</label><br>
+                    <input type="text" class = "form-control"  th:field="*{choiceD}"><br>
+                </div>
+                <div class="form-group">
+                    <label >Answer:</label><br>
+                    <input type="text" class = "form-control"  th:field="*{answer}"><br>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div th:insert="fragments/fragments :: sidenavscript"></div>
+</body>
+</html>

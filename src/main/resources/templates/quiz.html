@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Exam Quiz</title>
+    <div th:insert="fragments/fragments :: jquery"></div>
+    <div th:insert="fragments/fragments :: bootstrap"></div>
+    <div th:insert="fragments/fragments :: bootstrap-theme"></div>
+    <div th:insert="fragments/fragments :: sidenavcss"></div>
+    <div th:insert="fragments/fragments :: topnavcss"></div>
+    <div th:insert="fragments/fragments :: fontawesome"></div>
+    <div th:insert="fragments/fragments :: carouselcss"></div>
+
+
+</head>
+<body>
+
+<div th:insert="fragments/fragments :: topnav"></div>
+
+<span style="font-size:30px;cursor:pointer" id="menu-button" onclick="openNav()">☰</span>
+
+<div th:insert="fragments/fragments :: sidenav"></div>
+
+<h2 class="text-center">QUIZ</h2>
+<div class="d-flex justify-content-center">
+    <button id="start-btn" class="btn btn-primary text-center mr-2">start</button>
+    <button id="stop-btn" class="btn btn-primary text-center ml-2">stop</button>
+</div>
+
+
+<div class="col-4 mt-2 mx-auto">
+    <div class="card text-center ">
+        <div class="d-flex justify-content-center">
+            <span id="demo" class="mx-auto p-3"></span>
+        </div>
+    </div>
+</div>
+
+<form th:action="@{/post-answer/}" th:object="${form}" method="post">
+    <div class="container-fluid mt-3" >
+        <div class="col-6  mx-auto">
+            <div class="card" style="min-height:50vh;">
+                <div class="mt-5 ml-3" >
+                    <div class="carousel">
+                        <div class="carousel__item"   th:each="el,stat:*{questions}">
+                                <div >
+                                    <p th:text="${el.question}" th:field="*{questions[__${stat.index}__].question}"> </p>
+                                </div>
+
+                            <div class="d-flex flex-row">
+                                <input type="checkbox"
+                                th:field="*{questions[__${stat.index}__].choiceA}"
+                                th:value="${el.choiceA}"
+                                       checked=""
+                                />
+                                <label th:text="${el.choiceA}"></label>
+                            </div>
+
+                            <div class="d-flex flex-row">
+                                <input type="checkbox"
+                                       th:field="*{questions[__${stat.index}__].choiceB}"
+                                       th:value="${el.choiceB}"
+                                       checked=""
+
+                                />
+                                <label th:text="${el.choiceB}"></label>
+
+                            </div>
+
+                            <div class="d-flex flex-row">
+                                <input type="checkbox"
+                                       th:field="*{questions[__${stat.index}__].choiceC}"
+                                       th:value="${el.choiceC}"
+                                       checked=""
+
+                                />
+                                <label th:text="${el.choiceC}"></label>
+
+                            </div>
+
+                            <div class="d-flex flex-row">
+                                <input type="checkbox"
+                                       th:field="*{questions[__${stat.index}__].choiceD}"
+                                       th:value="${el.choiceD}"
+                                       checked=""
+
+                                />
+                                <label th:text="${el.choiceD}"></label>
+                            </div>
+
+                            <div>
+                                <p  class="d-none" th:text="${el.answer}" th:field="*{questions[__${stat.index}__].answer}"> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    $('input[type=checkbox]').removeAttr('checked');
+</script>
+
+
+<div>
+
+</div>
+
+<div th:insert="fragments/fragments :: carouselcss"></div>
+<div th:insert="fragments/fragments :: sidenavscript"></div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<div th:insert="fragments/fragments :: carouseljs"></div>
+
+</body>
+</html>
